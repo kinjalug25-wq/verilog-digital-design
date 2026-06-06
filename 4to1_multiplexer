@@ -1,0 +1,6 @@
+module multiplexer(in1,in2,in3,in4,s,y);
+  input in1,in2,in3,in4;
+  input reg[1:0] s;
+  output y;
+  assign y=(in1&~s[0]&~s[1])|(in2&~s[0]&s[1])|(in3&s[0]&~s[1])|(in1&s[0]&s[1]);
+endmodule
