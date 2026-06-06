@@ -1,0 +1,7 @@
+module bcd_to_excess3(input A,B,C,D,
+                      output w,x,y,z);
+  assign w=A|(B&D)|(B&C);
+  assign x=(~B&C)|(~B&D)|(B&~C&~D);
+  assign y=(C&D)|(~C&~D);
+  assign z=~D;
+endmodule
