@@ -1,0 +1,27 @@
+module testbench();
+  reg d,clk;
+  wire q;
+ 
+  master_slave dut(.d(d),
+                   .clk(clk),
+                   .q(q));
+  
+  //clock generator
+  always #20 clk=~clk;
+  initial begin
+    clk=0;
+    d=1;
+    #30; d=0;
+    #40; d=1;
+    #40; d=0;
+  end
+  initial begin
+  $monitor("clk:%d , d=%b , q=%b",$time,d,q);
+  end
+  initial #500 $finish;
+endmodule
+    
+    
+  
+ 
+                   
