@@ -1,0 +1,23 @@
+module dlatch(d,clk,q);
+  input clk,d;
+  output reg q;
+  always@(d,clk)
+    begin
+      if(clk)
+        q<=d;
+    end 
+endmodule
+
+module master_slave(d,clk,q);
+  input d,clk;
+  output reg q;
+  wire w;
+  dlatch master(.d(d),
+                .clk(clk),
+                .q(w));
+  dlatch slave(.d(w),
+               .clk(~clk),
+               .q(q));
+endmodule
+  
+  
