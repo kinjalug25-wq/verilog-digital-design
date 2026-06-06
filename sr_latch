@@ -1,0 +1,6 @@
+module sr_latch(s,r,q,q_d);
+  input s,r;
+  output wire q,q_d;
+  assign q_d=~(s|q_d);
+  assign q=~(r|q);
+endmodule
