@@ -1,0 +1,22 @@
+module test();
+  reg [3:0] x,y;
+  reg c0;
+  wire c4;
+  wire [3:0] s;
+  //instantiating
+  four_bitadder dut(.x(x),
+                .y(y),
+                .c0(c0),
+                .s(s),
+                .c4(c4));
+  //testing
+
+  initial begin
+    $monitor("x=%b,y=%b,c0=%b,sum=%b",x,y,c0,s);
+    x=4'b0001;
+    y=4'b0100;
+    c0=0;
+    #20;
+    $finish;
+  end
+endmodule
