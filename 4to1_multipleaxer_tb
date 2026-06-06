@@ -1,0 +1,39 @@
+module testbench();
+  reg in1,in2,in3,in4;
+  reg [1:0] sel;
+  wire out;
+  //instantiating
+  multiplexer mux(.in1(in1),.in2(in2),.in3(in3),.in4(in4),.s(sel),.y(out));
+  initial 
+    begin
+      $monitor("time=%0t,in1=%b,in2=%b,in3=%b,in4=%b,sel=%b,out=%b",$time,in1,in2,in3,in4,sel,out);
+      in1=1'b0;
+      in2=1'b0;
+      in3=1'b1;
+      in4=1'b0;
+      sel=2'b00;
+      #20;
+      in1=1'b0;
+      in2=1'b0;
+      in3=1'b1;
+      in4=1'b0;
+      sel=2'b01;
+      #20;
+      in1=1'b0;
+      in2=1'b0;
+      in3=1'b1;
+      in4=1'b0;
+      sel=2'b10;
+      #20;
+      in1=1'b0;
+      in2=1'b0;
+      in3=1'b1;
+      in4=1'b0;
+      sel=2'b11;
+      
+     $finish;
+    end
+  
+endmodule
+      
+  
