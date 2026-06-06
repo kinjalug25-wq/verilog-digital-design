@@ -1,0 +1,58 @@
+module testbench();
+  //input and output
+  reg[3:0] bcd;
+  wire[3:0] excess3;
+  //instantiating bcd converter
+  bcd_to_excess3 dut(
+    .A(bcd[3]),
+    .B(bcd[2]),
+    .C(bcd[1]),
+    .D(bcd[0]),
+    .w(excess3[3]),
+    .x(excess3[2]),
+    .y(excess3[1]),
+    .z(excess3[0]));
+    
+  //clk and reset
+  reg rst;
+  reg clk;
+  //initial values
+  initial
+    begin
+      clk=0;
+      rst=1;
+      #20;
+      rst=0;
+    end
+  //clock generator
+  always 
+    begin
+      #10clk=~clk;
+    end
+  //monitor
+  initial
+    $monitor("%d:BCD=%b,excess3=%b",$time,bcd,excess3);
+  //test sequence
+  reg[3:0]i;
+  always @ (posedge clk or posedge rst)
+    begin
+      if(rst)
+        begin
+          i=0;
+        end
+      else 
+        begin
+          bcd<=i;
+          #20;
+          i=i+1;
+          if(i==10)
+            $finish;
+        end
+      
+    end
+endmodule
+  
+  
+  
+  
+  
