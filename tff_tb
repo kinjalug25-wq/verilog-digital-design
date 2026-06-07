@@ -1,0 +1,33 @@
+module testbench();
+  reg t,clk,rst;
+  wire q,q_d;
+  reg [3:0] i;
+  tff dut(.t(t),
+          .rst(rst),
+          .clk(clk),
+          .q(q),
+          .q_d(q_d));
+  initial begin
+    rst=1;
+    clk=0;
+    i=0;
+    #25;
+    rst=0;
+  end
+  //monitor
+  initial begin
+    $monitor("time:%d,t=%b,q=%b,q_b=%b",$time,t,q,q_d);
+  end
+  //clk generator
+  always begin
+    #10;
+    clk=~clk;
+  end
+  always @(posedge clk) begin
+    t=$random%2;
+    i=i+1;
+    if (i==5) $finish;
+  end
+endmodule
+  
+    
